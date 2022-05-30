@@ -1,16 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Camisa",
-      "price": 59.9
-    },
-    {
-      "id": 2,
-      "name": "Calça vermelha",
-      "price": 90
-    },
-    {
       "id": 3,
       "name": "Boné aba reta",
       "price": 29.9
@@ -29,6 +19,21 @@
       "name": "camiseta",
       "price": "25.00",
       "id": 6
+    },
+    {
+      "name": "mouse",
+      "price": "60.00",
+      "id": 7
+    },
+    {
+      "name": "jaqueta",
+      "price": "100.00",
+      "id": 8
+    },
+    {
+      "name": "suporte",
+      "price": "3.00",
+      "id": 9
     }
   ]
 }

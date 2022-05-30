@@ -10,7 +10,7 @@ const url = "http://localhost:3000/products"
 
 function App() {
 
-  const {data: items} = useFetch(url);
+  const {data: items, httpConfig, loading, error} = useFetch(url);
 
   const [products, setProducts] = useState([])
 
@@ -30,34 +30,45 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const products = {
+    const product = {
       name,
       price,
     };
 
-    const res = await fetch(url, {
-      method:"POST",
-      headers:{
-        "Content-type":"application/json"
-      },
-      body: JSON.stringify(products)
-    });
+    // const res = await fetch(url, {
+    //   method:"POST",
+    //   headers:{
+    //     "Content-type":"application/json"
+    //   },
+    //   body: JSON.stringify(products)
+    // });
 
-    const addedProduct = await res.json();
+    // const addedProduct = await res.json();
 
-    setProducts((preventDefault) => [...preventDefault, addedProduct])
+    // setProducts((preventDefault) => [...preventDefault, addedProduct])
+
+    httpConfig(product, "POST");
 
     setName("");
     setPrice("");
 
   }
+
+  const handleDelete = (id) => {
+    httpConfig(id, "DELETE")
+   }
+
+
   return (
     <div className="App">
       <h1>Lista de Produtos</h1>
+      {loading && <p>Carregando dados ...</p>}
+      {error && <p>{error}</p>}
       <ul>
-        {items && items.map((p) => (
-          <li key={p.id}>{p.name} - R$: {p.price}</li>
+        {items && items.map((product) => (
+          <li key={product.id}>{product.name} - R$: {product.price}  <button onClick={() => handleDelete(product.id)}>Excluir</button></li> 
         ))}
+
       </ul>
       <div className="add-products">
         <form onSubmit={handleSubmit}>
@@ -71,7 +82,8 @@ function App() {
             <input type="number" value={price} name="price" onChange={(e) => setPrice(e.target.value)}>
             </input>
           </label>
-          <input type="submit" value="criar"></input>
+          {loading && <input type="submit" value="criar" disabled></input>}          
+          {!loading && <input type="submit" value="criar"></input>}
         </form>
       </div>
 
