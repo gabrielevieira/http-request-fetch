@@ -4,11 +4,9 @@ import { useEffect, useState } from "react"
 
 export const useFetch = (url) => {
     const [data, setData] = useState(null);
-
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
     const [callFetch, setCallFetch] = useState(null);
-
     const [loading, setLoding] = useState(false)
     const [error, setError] = useState(false);
 
